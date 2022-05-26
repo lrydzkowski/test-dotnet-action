@@ -1,0 +1,23 @@
+name: 'Test .NET'
+runs:
+  using: "composite"
+
+  steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v2
+      
+    - name: Show .NET version
+      run: dotnet --version
+      shell: sh
+
+    - name: Install dependencies
+      run: dotnet restore
+      shell: sh
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+      shell: sh
+
+    - name: Run tests
+      run: dotnet test --no-restore --verbosity normal
+      shell: sh
